@@ -47,8 +47,7 @@ function addSelectedItemToCart() {
   //get the quantity
   var quantity = how_many.target.value;
   //using those, add one item to the Cart
-  var item_to_add = new CartItem(product, quantity);
-  cart.items.push(item_to_add);
+  cart.addItem(product, quantity);
   console.log(cart);
 }
 
