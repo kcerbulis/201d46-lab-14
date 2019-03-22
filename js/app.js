@@ -1,4 +1,4 @@
-'use strict';
++'use strict';
 
 // Cart constructor.
 var Cart = function(items) {
@@ -7,11 +7,16 @@ var Cart = function(items) {
 };
 
 Cart.prototype.addItem = function(product, quantity) {
-  // TODO: Fill in this instance method to create a new CartItem and add it to this.items
+  //Fill in this instance method to create a new CartItem and add it to this.items
+  var item_to_add = new CartItem(product, quantity);
+  this.items.push(item_to_add);
 };
 
 Cart.prototype.saveToLocalStorage = function() {
-  // TODO: Fill in this instance method to save the contents of the cart to localStorage
+  //Fill in this instance method to save the contents of the cart to localStorage
+  var stringy_cart = JSON.stringify(this);
+  localStorage.setItem('cart', stringy_cart);
+
 };
 
 Cart.prototype.removeItem = function(item) {
@@ -28,6 +33,7 @@ var CartItem = function(product, quantity) {
 var Product = function(filePath, name) {
   this.filePath = filePath;
   this.name = name;
+  this.id = name.toLowerCase().replace(/\s|-/g, '');
   Product.allProducts.push(this);
 };
 Product.allProducts = [];
