@@ -66,6 +66,10 @@ function updateCartPreview() {
   // TODO: Add a new element to the cartContents div with that information
 }
 
+
+//---------------------------------------
+
+
 var item_selection = document.getElementById('items');
 item_selection.addEventListener('change', function(event) { selection = event; });
 
@@ -81,3 +85,13 @@ catalogForm.addEventListener('submit', handleSubmit);
 // Before anything else of value can happen, we need to fill in the select
 // drop down list in the form.
 populateForm();
+
+if (localStorage.getItem('cart') !== null) {
+  var currentCartFromLs = localStorage.getItem('cart');
+  cart = new Cart(JSON.parse(currentCartFromLs).items);
+  console.log(cart);
+}
+
+if (localStorage.getItem('cart') !== null) {
+  updateCounter();
+}

@@ -7,7 +7,7 @@ table.addEventListener('click', removeItemFromCart);
 var cart;
 
 function loadCart() {
-  var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+  var cartItems = JSON.parse(localStorage.getItem('cart')).items || [];
   cart = new Cart(cartItems);
 }
 
@@ -24,21 +24,17 @@ function clearCart() {}
 // TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
 function showCart() {
 
-
-  var currentCartFromLs = localStorage.getItem('cart');
-  cart = JSON.parse(currentCartFromLs);
   // TODO: Find the table body
   var cartTableSelector = document.getElementById('cart');
 
   // TODO: Iterate over the items in the cart
   // TODO: Create a TR
   // TODO: Create a TD for the delete link, quantity,  and the item
-  for (var i = 0; i < cart.items.length; i++){
-
+  for (var i = 0; i < cart.items.length; i++) {
     var currentCartRow = document.createElement('tr');
 
     var currentItemDelete = document.createElement('td');
-    currentItemDelete.innerHtml = '';
+    currentItemDelete.textContent = 'X';
     currentCartRow.appendChild(currentItemDelete);
 
     var currentItemQuantity = document.createElement('td');
@@ -50,8 +46,6 @@ function showCart() {
     currentCartRow.appendChild(currentCartItem);
 
     cartTableSelector.appendChild(currentCartRow);
-
-
   }
 
   //
@@ -65,6 +59,16 @@ function removeItemFromCart(event) {
   // TODO: Save the cart back to local storage
   // TODO: Re-draw the cart table
 
+}
+
+var currentCartFromLs = localStorage.getItem('cart');
+cart = new Cart(JSON.parse(currentCartFromLs).items);
+console.log(cart);
+
+if (localStorage.getItem('cart') !== null) {
+  localStorage.setItem('cart_count', cart.items.length);
+  var cart_count_element = document.getElementById('itemCount');
+  cart_count_element.textContent = cart.items.length;
 }
 
 // This will initialize the page and draw the cart on screen
